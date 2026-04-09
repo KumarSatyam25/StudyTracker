@@ -1,13 +1,19 @@
 {% extends 'tracker/base.html' %}
-
+{% load static %}
 {% block title %}StudyTracker – Stats{% endblock %}
 {% block body_class %}page-stats{% endblock %}
 {% block nav_stats %}active{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/stats.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="stats-wrapper">
   <div class="page-header">
-    <h1 class="page-title">📊 Study Stats</h1>
+    <h1 class="page-title"><!--📊--><img src="{% static 'statistics.png' %}" 
+     alt="Stats Icon" 
+     style="width:30px; height:30px;">
+ Study Stats</h1>
     <p class="page-sub">Track your progress and celebrate your wins.</p>
   </div>
 
@@ -43,22 +49,28 @@
   <!-- Summary Cards -->
   <div class="summary-cards">
     <div class="summary-card">
-      <div class="summary-icon">✅</div>
+      <div class="summary-icon"><img src="{% static 'task.png' %}" 
+     alt="Stats Icon" 
+     style="width:50px; height:50px;"></div>
       <div class="summary-value">{{ total_sessions }}</div>
       <div class="summary-label">Tasks Completed</div>
     </div>
     <div class="summary-card">
-      <div class="summary-icon">⏱</div>
+      <div class="summary-icon"><img src="{% static 'hours.png' %}" 
+     alt="Stats Icon" 
+     style="width:60px; height:60px;"></div>
       <div class="summary-value">{{ total_time }}</div>
       <div class="summary-label">Total Study Time</div>
     </div>
     <div class="summary-card">
-      <div class="summary-icon">🍅</div>
+      <div class="summary-icon"><h2>🍅</h2></div>
       <div class="summary-value">{{ total_pomodoros }}</div>
       <div class="summary-label">Pomodoros Done</div>
     </div>
     <div class="summary-card">
-      <div class="summary-icon">⚡</div>
+      <div class="summary-icon"><img src="{% static 'session.png' %}" 
+     alt="Stats Icon" 
+     style="width:60px; height:60px;"></div>
       <div class="summary-value">{{ avg_time }}</div>
       <div class="summary-label">Avg. Session Time</div>
     </div>
@@ -68,7 +80,6 @@
   <div class="chart-section">
     <div class="chart-header">
       <h2 class="section-title">Daily Study Trend</h2>
-      <p class="chart-subtitle">A line graph of daily study time in the selected date range.</p>
     </div>
 
     {% if daily_study_data %}
@@ -109,7 +120,6 @@
     <div class="summary-table-card">
       <div class="summary-table-header">
         <h2 class="section-title">Weekly Summary</h2>
-        <p class="chart-subtitle">Totals grouped by week.</p>
       </div>
       {% if weekly_summary_data %}
       <div class="summary-table-wrap">
@@ -142,7 +152,6 @@
     <div class="summary-table-card">
       <div class="summary-table-header">
         <h2 class="section-title">Monthly Summary</h2>
-        <p class="chart-subtitle">Totals grouped by month.</p>
       </div>
       {% if monthly_summary_data %}
       <div class="summary-table-wrap">
@@ -270,7 +279,7 @@
       context.stroke();
 
       const labelSeconds = maxSeconds - (maxSeconds / 4) * i;
-      context.fillStyle = '#8c7b70';
+      context.fillStyle = '#cccccc';
       context.font = '12px Segoe UI, system-ui, sans-serif';
       context.textAlign = 'right';
       context.textBaseline = 'middle';
@@ -327,7 +336,7 @@
       context.arc(point.x, point.y, pointRadius, 0, Math.PI * 2);
       context.fill();
 
-      context.fillStyle = '#3d3029';
+      context.fillStyle = '#ffffff';
       context.font = '600 12px Segoe UI, system-ui, sans-serif';
       context.textAlign = 'center';
 
@@ -340,7 +349,7 @@
         context.fillText(`${formatHours(item.seconds)}h`, point.x, point.y - 10);
       }
 
-      context.fillStyle = '#8c7b70';
+      context.fillStyle = '#cccccc';
       context.font = '12px Segoe UI, system-ui, sans-serif';
       context.textBaseline = 'top';
       const labelY = topPad + chartHeight + 10;

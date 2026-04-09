@@ -4,8 +4,12 @@
 {% block title %}StudyTracker – Timer{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block nav_home %}active{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="timer-wrapper">
 
   <!-- Task Input Section -->
@@ -72,7 +76,7 @@
       <p class="modal-saved">✅ Session saved to your stats!</p>
       <div class="modal-actions">
         <button class="btn btn-start" id="modalNewTask">Start New Task</button>
-        <a href="{% url 'stats' %}" class="btn btn-outline">View Stats</a>
+        <a href="{% url 'stats' %}" class="btn btn-outline" id="statsBtn">View Stats</a>
       </div>
     </div>
   </div>
@@ -94,6 +98,12 @@
 const CSRF_TOKEN = "{{ csrf_token }}";
 const SAVE_URL = "{% url 'save_session' %}";
 </script>
+{% else %}
+<div class="container">
+  <h1>Welcome to StudyTracker</h1>
+  <a href="{% url 'login' %}" class="btn btn-primary">Get Started</a>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block extra_scripts %}
